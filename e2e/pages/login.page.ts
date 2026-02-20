@@ -34,8 +34,8 @@ export class LoginPage {
     this.googleButton = page.getByRole("button", { name: /google/i });
     this.githubButton = page.getByRole("button", { name: /github/i });
     this.divider = page.getByText(/— o —/i);
-    this.emailInput = page.getByLabel(/correo|email/i);
-    this.passwordInput = page.getByLabel(/contraseña|password/i);
+    this.emailInput = page.getByPlaceholder(/ana@ejemplo/i);
+    this.passwordInput = page.getByPlaceholder(/contraseña/i);
     this.forgotPasswordLink = page.getByRole("link", {
       name: /olvidaste/i,
     });

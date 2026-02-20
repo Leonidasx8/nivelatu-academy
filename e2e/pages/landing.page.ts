@@ -48,18 +48,18 @@ export class LandingPage {
   constructor(page: Page) {
     this.page = page;
 
-    // Nav
+    // Nav — scope to <header> to avoid matching Radix Sheet portal links
     this.navLogo = page.getByRole("link", { name: /NivelatuAcademy/i });
-    this.navLoginLink = page.getByRole("link", { name: /iniciar sesión/i });
-    this.navStartButton = page.getByRole("link", {
+    this.navLoginLink = page.locator("header").getByRole("link", { name: /iniciar sesión/i });
+    this.navStartButton = page.locator("header").getByRole("link", {
       name: /empieza gratis/i,
     });
 
-    // Hero
-    this.heroBadge = page.getByText(/Metodología SOSTAC/i);
+    // Hero — exact badge text avoids matching the SOSTAC section heading
+    this.heroBadge = page.getByText("Metodología SOSTAC · 7 Agentes IA");
     this.heroHeading = page.getByRole("heading", {
       name: /lanza tu academia/i,
-    });
+    }).first();
     this.heroCtaPrimary = page.getByRole("link", {
       name: /empieza tu plan/i,
     });

@@ -39,21 +39,21 @@ export class RegisterPage {
     this.accountHeading = page.getByRole("heading", {
       name: /crea tu cuenta/i,
     });
-    this.googleButton = page.getByRole("button", { name: /google/i });
-    this.githubButton = page.getByRole("button", { name: /github/i });
-    this.firstNameInput = page.getByLabel(/nombre/i).first();
-    this.lastNameInput = page.getByLabel(/apellido/i);
-    this.emailInput = page.getByLabel(/correo|email/i);
-    this.passwordInput = page.getByLabel(/contraseña|password/i);
+    this.googleButton = page.getByRole("button", { name: /google/i }).first();
+    this.githubButton = page.getByRole("button", { name: /github/i }).first();
+    this.firstNameInput = page.getByPlaceholder("Ana", { exact: true });
+    this.lastNameInput = page.getByPlaceholder("García", { exact: true });
+    this.emailInput = page.getByPlaceholder("ana@ejemplo.com", { exact: true });
+    this.passwordInput = page.getByPlaceholder(/mínimo 8/i);
     this.termsCheckbox = page.getByRole("checkbox");
-    this.continueButton = page.getByRole("button", { name: /continuar/i });
+    this.continueButton = page.getByRole("button", { name: /continuar →/i });
 
     // Step 2
     this.profileHeading = page.getByRole("heading", {
       name: /cuéntanos/i,
     });
     this.academyNameInput = page.getByLabel(/nombre.*academia/i);
-    this.backButton = page.getByRole("button", { name: /anterior|atrás/i });
+    this.backButton = page.getByRole("button", { name: /volver/i });
 
     // Step 3
     this.planHeading = page.getByRole("heading", { name: /elige tu plan/i });

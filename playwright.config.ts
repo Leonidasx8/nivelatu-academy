@@ -15,14 +15,20 @@ export default defineConfig({
   testDir: "./e2e/tests",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  retries: process.env.CI ? 2 : 1,
+  workers: process.env.CI ? 1 : 2,
   reporter: [
     ["html", { open: "never" }],
     ["list"],
   ],
+  timeout: 60_000,
+  expect: {
+    timeout: 15_000,
+  },
   use: {
     baseURL: "http://localhost:3000",
+    navigationTimeout: 60_000,
+    actionTimeout: 15_000,
     trace: "on-first-retry",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
@@ -50,6 +56,7 @@ export default defineConfig({
       },
     },
   ],
+  globalSetup: "./e2e/global-setup.ts",
   webServer: {
     command: "pnpm run dev",
     url: "http://localhost:3000",

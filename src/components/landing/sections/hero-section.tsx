@@ -61,7 +61,7 @@ export function HeroSection() {
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center gap-4">
           <Link
-            href="/register"
+            href="/auth/register"
             className="inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-white font-sans font-semibold px-8 py-4 rounded-xl btn-glow transition-all duration-200 text-base"
           >
             <Zap className="w-5 h-5" fill="currentColor" />

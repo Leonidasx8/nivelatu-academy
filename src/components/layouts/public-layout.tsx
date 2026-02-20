@@ -12,9 +12,9 @@ import {
 import { Button } from "@/components/ui/button";
 
 const NAV_LINKS = [
-  { label: "Agentes", href: "#agentes" },
-  { label: "SOSTAC", href: "#sostac" },
-  { label: "Precios", href: "#precios" },
+  { label: "Agentes", href: "/#agentes" },
+  { label: "SOSTAC", href: "/#sostac" },
+  { label: "Precios", href: "/pricing" },
 ];
 
 interface PublicLayoutProps {
@@ -75,14 +75,14 @@ export function PublicLayout({ children }: PublicLayoutProps) {
               size="sm"
               className="border-glass-border bg-transparent text-text-secondary hover:text-text-primary hover:bg-glass-bg-hover hover:border-glass-border-hover transition-all duration-200"
             >
-              <Link href="/login">Iniciar sesión</Link>
+              <Link href="/auth/login">Iniciar sesión</Link>
             </Button>
             <Button
               asChild
               size="sm"
               className="bg-accent hover:bg-accent-light text-white font-semibold btn-glow transition-all duration-200"
             >
-              <Link href="/register">
+              <Link href="/auth/register">
                 Empieza gratis <span aria-hidden="true">→</span>
               </Link>
             </Button>
@@ -137,7 +137,7 @@ export function PublicLayout({ children }: PublicLayoutProps) {
                       variant="outline"
                       className="w-full border-glass-border bg-transparent text-text-secondary hover:text-text-primary hover:bg-glass-bg-hover"
                     >
-                      <Link href="/login" onClick={() => setMobileOpen(false)}>
+                      <Link href="/auth/login" onClick={() => setMobileOpen(false)}>
                         Iniciar sesión
                       </Link>
                     </Button>
@@ -145,7 +145,7 @@ export function PublicLayout({ children }: PublicLayoutProps) {
                       asChild
                       className="w-full bg-accent hover:bg-accent-light text-white font-semibold btn-glow"
                     >
-                      <Link href="/register" onClick={() => setMobileOpen(false)}>
+                      <Link href="/auth/register" onClick={() => setMobileOpen(false)}>
                         Empieza gratis →
                       </Link>
                     </Button>

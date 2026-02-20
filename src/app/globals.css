@@ -1,26 +1,387 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ═══════════════════════════════════════════════════════════════
+   NIVELATUACADEMY — ENERGY FLOW DESIGN SYSTEM
+   TailwindCSS v4 + Custom Properties
+   ═══════════════════════════════════════════════════════════════ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* ─── FONTS ─── */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* ─── COLORS — BACKGROUNDS ─── */
+  --color-bg-primary: #0D0D0F;
+  --color-bg-deep: #08080C;
+  --color-bg-card: #141418;
+  --color-bg-hover: #1A1A20;
+  --color-bg-border: #1E1E26;
+  --color-bg-sidebar: #0A0A0E;
+
+  /* ─── COLORS — ACCENT (ORANGE ENERGY) ─── */
+  --color-accent: #FF6B00;
+  --color-accent-light: #FF8C33;
+  --color-accent-dark: #CC5500;
+  --color-accent-glow: rgba(255, 107, 0, 0.12);
+
+  /* ─── COLORS — SOSTAC PHASES ─── */
+  --color-sostac-s: #3B82F6;
+  --color-sostac-o: #F59E0B;
+  --color-sostac-st: #10B981;
+  --color-sostac-t: #EF4444;
+  --color-sostac-a: #8B5CF6;
+  --color-sostac-c: #06B6D4;
+
+  /* ─── COLORS — AGENTS ─── */
+  --color-agent-delfino: #06B6D4;
+  --color-agent-forge: #FF6B00;
+  --color-agent-atlas: #22c55e;
+  --color-agent-pulse: #3B82F6;
+  --color-agent-vega: #3B82F6;
+  --color-agent-orlando: #F59E0B;
+  --color-agent-fernando: #10B981;
+  --color-agent-tavo: #EF4444;
+  --color-agent-carla: #8B5CF6;
+  --color-agent-ivan: #06B6D4;
+
+  /* ─── COLORS — STATUS ─── */
+  --color-status-draft: #F59E0B;
+  --color-status-review: #3B82F6;
+  --color-status-approved: #10B981;
+  --color-status-redo: #EF4444;
+  --color-status-pending: #6B7280;
+
+  /* ─── COLORS — TEXT ─── */
+  --color-text-primary: #FFFFFF;
+  --color-text-body: #E5E5E5;
+  --color-text-secondary: #9CA3AF;
+  --color-text-disabled: #6B7280;
+
+  /* ─── COLORS — GLASS ─── */
+  --color-glass-bg: rgba(255, 255, 255, 0.03);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-glass-bg-hover: rgba(255, 255, 255, 0.05);
+  --color-glass-border-hover: rgba(255, 255, 255, 0.15);
+
+  /* ─── BORDER RADII ─── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+
+  /* ─── SPACING EXTENSIONS ─── */
+  --spacing-18: 4.5rem;
+  --spacing-88: 22rem;
+  --spacing-100: 25rem;
+  --spacing-120: 30rem;
+
+  /* ─── LAYOUT ─── */
+  --spacing-sidebar: 260px;
+  --spacing-topbar: 56px;
+  --spacing-pillarnav: 44px;
+  --spacing-bottombar: 56px;
+  --spacing-chat: 300px;
+  --spacing-video: 300px;
+
+  /* ─── ANIMATIONS ─── */
+  --animate-energy-pulse: energyPulse 4s ease-in-out infinite;
+  --animate-cable-flow: cableFlow 6s linear infinite;
+  --animate-node-glow: nodeGlow 2s ease-in-out infinite;
+  --animate-typing-bounce: typingBounce 1.5s ease infinite;
+  --animate-fade-in: fadeIn 300ms ease forwards;
+  --animate-fade-in-up: fadeInUp 400ms ease forwards;
+  --animate-fade-in-down: fadeInDown 400ms ease forwards;
+  --animate-slide-right: slideInRight 300ms ease forwards;
+  --animate-slide-left: slideInLeft 300ms ease forwards;
+  --animate-scale-in: scaleIn 300ms ease forwards;
+  --animate-pop-in: popIn 400ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  --animate-glow-breathe: glowBreathe 3s ease-in-out infinite;
+  --animate-progress-fill: progressFill 600ms ease forwards;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ═══════════════════════════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+html {
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg-primary);
+  color: var(--color-text-body);
+  font-family: var(--font-sans);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AGENT COLOR PROPAGATION
+   Sets --agent-color custom property based on [data-agent] attribute
+   ═══════════════════════════════════════════════════════════════ */
+
+[data-agent="delfino"] {
+  --agent-color: #06B6D4;
+  --agent-color-10: rgba(6, 182, 212, 0.10);
+  --agent-color-15: rgba(6, 182, 212, 0.15);
+  --agent-color-20: rgba(6, 182, 212, 0.20);
+  --agent-color-30: rgba(6, 182, 212, 0.30);
+}
+
+[data-agent="forge"] {
+  --agent-color: #FF6B00;
+  --agent-color-10: rgba(255, 107, 0, 0.10);
+  --agent-color-15: rgba(255, 107, 0, 0.15);
+  --agent-color-20: rgba(255, 107, 0, 0.20);
+  --agent-color-30: rgba(255, 107, 0, 0.30);
+}
+
+[data-agent="atlas"] {
+  --agent-color: #22c55e;
+  --agent-color-10: rgba(34, 197, 94, 0.10);
+  --agent-color-15: rgba(34, 197, 94, 0.15);
+  --agent-color-20: rgba(34, 197, 94, 0.20);
+  --agent-color-30: rgba(34, 197, 94, 0.30);
+}
+
+[data-agent="pulse"] {
+  --agent-color: #3B82F6;
+  --agent-color-10: rgba(59, 130, 246, 0.10);
+  --agent-color-15: rgba(59, 130, 246, 0.15);
+  --agent-color-20: rgba(59, 130, 246, 0.20);
+  --agent-color-30: rgba(59, 130, 246, 0.30);
+}
+
+[data-agent="vega"] {
+  --agent-color: #3B82F6;
+  --agent-color-10: rgba(59, 130, 246, 0.10);
+  --agent-color-15: rgba(59, 130, 246, 0.15);
+  --agent-color-20: rgba(59, 130, 246, 0.20);
+  --agent-color-30: rgba(59, 130, 246, 0.30);
+}
+
+[data-agent="orlando"] {
+  --agent-color: #F59E0B;
+  --agent-color-10: rgba(245, 158, 11, 0.10);
+  --agent-color-15: rgba(245, 158, 11, 0.15);
+  --agent-color-20: rgba(245, 158, 11, 0.20);
+  --agent-color-30: rgba(245, 158, 11, 0.30);
+}
+
+[data-agent="fernando"] {
+  --agent-color: #10B981;
+  --agent-color-10: rgba(16, 185, 129, 0.10);
+  --agent-color-15: rgba(16, 185, 129, 0.15);
+  --agent-color-20: rgba(16, 185, 129, 0.20);
+  --agent-color-30: rgba(16, 185, 129, 0.30);
+}
+
+[data-agent="tavo"] {
+  --agent-color: #EF4444;
+  --agent-color-10: rgba(239, 68, 68, 0.10);
+  --agent-color-15: rgba(239, 68, 68, 0.15);
+  --agent-color-20: rgba(239, 68, 68, 0.20);
+  --agent-color-30: rgba(239, 68, 68, 0.30);
+}
+
+[data-agent="carla"] {
+  --agent-color: #8B5CF6;
+  --agent-color-10: rgba(139, 92, 246, 0.10);
+  --agent-color-15: rgba(139, 92, 246, 0.15);
+  --agent-color-20: rgba(139, 92, 246, 0.20);
+  --agent-color-30: rgba(139, 92, 246, 0.30);
+}
+
+[data-agent="ivan"] {
+  --agent-color: #06B6D4;
+  --agent-color-10: rgba(6, 182, 212, 0.10);
+  --agent-color-15: rgba(6, 182, 212, 0.15);
+  --agent-color-20: rgba(6, 182, 212, 0.20);
+  --agent-color-30: rgba(6, 182, 212, 0.30);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GLASSMORPHISM UTILITIES
+   ═══════════════════════════════════════════════════════════════ */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.30);
+}
+
+.glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.glass-card-strong {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.30);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.glass-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.12);
+}
+
+/* Agent-colored focus */
+.glass-input-agent:focus {
+  border-color: var(--agent-color, var(--color-accent));
+  box-shadow: 0 0 0 3px var(--agent-color-10, rgba(255, 107, 0, 0.10));
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BUTTON UTILITIES
+   ═══════════════════════════════════════════════════════════════ */
+
+.btn-glow {
+  box-shadow: 0 4px 16px rgba(255, 107, 0, 0.30);
+}
+
+.btn-glow:hover {
+  box-shadow: 0 6px 24px rgba(255, 107, 0, 0.40);
+}
+
+.btn-agent-glow {
+  box-shadow: 0 4px 16px var(--agent-color-30, rgba(255, 107, 0, 0.30));
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   KEYFRAMES
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes energyPulse {
+  0%, 100% {
+    opacity: 0.7;
+    filter: drop-shadow(0 0 4px var(--agent-color, var(--color-accent-glow)));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 12px var(--agent-color, var(--color-accent))) drop-shadow(0 0 24px var(--agent-color-10, var(--color-accent-glow)));
+  }
+}
+
+@keyframes cableFlow {
+  0% { stroke-dashoffset: 100; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes nodeGlow {
+  0%, 100% { box-shadow: 0 0 6px var(--agent-color, var(--color-accent)); }
+  50% { box-shadow: 0 0 16px var(--agent-color, var(--color-accent)); }
+}
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-4px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes glowBreathe {
+  0%, 100% { box-shadow: 0 0 8px var(--color-accent-glow); }
+  50% { box-shadow: 0 0 20px var(--color-accent-glow), 0 0 40px rgba(255, 107, 0, 0.08); }
+}
+
+@keyframes progressFill {
+  from { width: 0; }
+}
+
+@keyframes progressGlow {
+  0%, 100% { box-shadow: 0 0 4px var(--agent-color, var(--color-accent-glow)); }
+  50% { box-shadow: 0 0 10px var(--agent-color, var(--color-accent)), 0 0 20px var(--agent-color-10, var(--color-accent-glow)); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   STAGGERED CHILDREN
+   ═══════════════════════════════════════════════════════════════ */
+
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeInUp 400ms ease forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 80ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 160ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 320ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 400ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 480ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 560ms; }
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.20);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   REDUCED MOTION
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

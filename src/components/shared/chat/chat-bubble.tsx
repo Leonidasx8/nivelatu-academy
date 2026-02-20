@@ -27,7 +27,7 @@ export function ChatBubble({ message, className }: ChatBubbleProps) {
         style={{
           borderLeft: "3px solid var(--agent-color, #FF6B00)",
           backgroundColor: "var(--agent-color-10, rgba(255,107,0,0.10))",
-          maxWidth: "240px",
+          maxWidth: "80%",
         }}
       >
         <div className="flex items-center gap-1.5 mb-1.5">
@@ -53,7 +53,7 @@ export function ChatBubble({ message, className }: ChatBubbleProps) {
         <div
           className="px-3 py-2.5 rounded-lg"
           style={{
-            maxWidth: "220px",
+            maxWidth: "80%",
             backgroundColor: "var(--agent-color-15, rgba(255,107,0,0.15))",
             borderRadius: "12px 2px 12px 12px",
             border: "1px solid var(--agent-color-20, rgba(255,107,0,0.20))",
@@ -83,7 +83,7 @@ export function ChatBubble({ message, className }: ChatBubbleProps) {
       <div
         className="glass-card px-3 py-2.5"
         style={{
-          maxWidth: "240px",
+          maxWidth: "80%",
           borderRadius: "2px 12px 12px 12px",
         }}
       >

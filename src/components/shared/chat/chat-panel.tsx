@@ -42,13 +42,7 @@ export function ChatPanel({ messages, agentId, onSend, isTyping = false, classNa
 
   return (
     <div
-      className={cn("flex flex-col", className)}
-      style={{
-        width: "300px",
-        backgroundColor: "#141418",
-        borderLeft: "1px solid rgba(255,255,255,0.08)",
-        height: "100%",
-      }}
+      className={cn("flex flex-col w-full h-full border-l border-[#2A2A2A] bg-[#0A0A0A]", className)}
     >
       <div
         className="flex items-center gap-2.5 px-3 py-3 flex-shrink-0"

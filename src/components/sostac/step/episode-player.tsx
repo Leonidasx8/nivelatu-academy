@@ -10,10 +10,9 @@ export function EpisodePlayer({ episode }: EpisodePlayerProps) {
     <div className="flex flex-col gap-3 p-3">
       {/* Video thumbnail area */}
       <div
-        className="relative flex items-center justify-center rounded-lg overflow-hidden cursor-pointer"
+        className="relative flex items-center justify-center rounded-lg overflow-hidden cursor-pointer w-full"
         style={{
-          width: "268px",
-          height: "168px",
+          aspectRatio: "16/10",
           backgroundColor: "#1A1A20",
           border: "1px solid rgba(255,255,255,0.08)",
         }}

@@ -1,4 +1,5 @@
 import { Video } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { EpisodePlayer } from "./episode-player";
 import { EpisodeList } from "./episode-list";
 import { AudioControls } from "./audio-controls";
@@ -6,20 +7,15 @@ import type { Episode } from "@/types/sostac";
 
 interface VideoPodcastPanelProps {
   episodes: Episode[];
+  className?: string;
 }
 
-export function VideoPodcastPanel({ episodes }: VideoPodcastPanelProps) {
+export function VideoPodcastPanel({ episodes, className }: VideoPodcastPanelProps) {
   const activeEpisode = episodes.find((e) => e.status === "active") ?? episodes[0];
 
   return (
     <div
-      className="flex flex-col flex-shrink-0"
-      style={{
-        width: "300px",
-        backgroundColor: "#141418",
-        borderLeft: "1px solid rgba(255,255,255,0.08)",
-        height: "100%",
-      }}
+      className={cn("flex flex-col w-full h-full border-l border-[#2A2A2A] bg-[#0A0A0A]", className)}
     >
       {/* Header */}
       <div

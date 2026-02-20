@@ -4,11 +4,9 @@ import { use, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AGENTS } from "@/lib/constants";
 import { forgeModules, atlasModules, sampleSteps, sampleEpisodes, sampleChatMessages } from "@/data/mock-sostac";
-import { ChatPanel } from "@/components/shared/chat/chat-panel";
-import { WorkspacePanel } from "@/components/sostac/step/workspace-panel";
-import { VideoPodcastPanel } from "@/components/sostac/step/video-podcast-panel";
+import { StepWorkspace } from "@/components/sostac/step/step-workspace";
 import type { AgentId } from "@/types";
-import type { Module, Step, ChatMessage } from "@/types/sostac";
+import type { Module, ChatMessage } from "@/types/sostac";
 
 interface StepViewPageProps {
   params: Promise<{ agentId: string; moduleId: string; stepId: string }>;
@@ -25,16 +23,6 @@ function getModules(agentId: string): Module[] {
   }
 }
 
-function getStep(moduleId: string, stepId: string): Step | undefined {
-  // Map stepId param like "paso-1" to step order
-  const orderMatch = stepId.match(/paso-(\d+)/);
-  const order = orderMatch ? parseInt(orderMatch[1], 10) : 1;
-
-  return sampleSteps.find(
-    (s) => s.moduleId === moduleId && s.order === order
-  ) ?? sampleSteps.find((s) => s.moduleId === moduleId);
-}
-
 export default function StepViewPage({ params }: StepViewPageProps) {
   const { agentId, moduleId, stepId } = use(params);
   const router = useRouter();
@@ -48,7 +36,10 @@ export default function StepViewPage({ params }: StepViewPageProps) {
   const orderMatch = stepId.match(/paso-(\d+)/);
   const currentOrder = orderMatch ? parseInt(orderMatch[1], 10) : 1;
 
-  const step = getStep(moduleId, stepId);
+  const step = sampleSteps.find(
+    (s) => s.moduleId === moduleId && s.order === currentOrder
+  ) ?? sampleSteps.find((s) => s.moduleId === moduleId);
+
   const totalSteps = module?.totalSteps ?? 1;
 
   const handleSend = (msg: string) => {
@@ -83,34 +74,19 @@ export default function StepViewPage({ params }: StepViewPageProps) {
     );
   }
 
-  const episodesForStep = sampleEpisodes.filter((e) => e.stepId === step.id);
-  const allEpisodes = sampleEpisodes;
-
   return (
-    <div data-agent={agentId} className="flex flex-row h-full overflow-hidden">
-      {/* Workspace panel */}
-      <WorkspacePanel
-        module={module}
-        step={step}
-        stepIndex={currentOrder}
-        onPrevious={handlePrevious}
-        onNext={handleNext}
-        isFirst={currentOrder === 1}
-        isLast={currentOrder === totalSteps}
-      />
-
-      {/* Chat panel */}
-      <ChatPanel
-        messages={chatMessages}
-        agentId={agentId as AgentId}
-        onSend={handleSend}
-        className="hidden xl:flex flex-shrink-0"
-      />
-
-      {/* Video/podcast panel */}
-      <div className="hidden lg:flex flex-shrink-0">
-        <VideoPodcastPanel episodes={allEpisodes} />
-      </div>
-    </div>
+    <StepWorkspace
+      module={module}
+      step={step}
+      stepIndex={currentOrder}
+      onPrevious={handlePrevious}
+      onNext={handleNext}
+      isFirst={currentOrder === 1}
+      isLast={currentOrder === totalSteps}
+      chatMessages={chatMessages}
+      agentId={agentId as AgentId}
+      onSendMessage={handleSend}
+      episodes={sampleEpisodes}
+    />
   );
 }

@@ -14,6 +14,7 @@ interface WorkspacePanelProps {
   onNext: () => void;
   isFirst: boolean;
   isLast: boolean;
+  mode?: "full" | "compact";
 }
 
 export function WorkspacePanel({
@@ -24,6 +25,7 @@ export function WorkspacePanel({
   onNext,
   isFirst,
   isLast,
+  mode = "full",
 }: WorkspacePanelProps) {
   const [formValues, setFormValues] = useState<Record<string, unknown>>({});
 
@@ -44,11 +46,11 @@ export function WorkspacePanel({
     });
 
   return (
-    <div className="flex flex-col flex-1 overflow-y-auto p-6">
+    <div className={`flex flex-col flex-1 overflow-y-auto ${mode === "compact" ? "p-4" : "p-6"}`}>
       <WorkspaceHeader
         module={module}
         step={step}
-        agentInstruction={step.agentInstruction}
+        agentInstruction={mode === "full" ? step.agentInstruction : undefined}
         stepIndex={stepIndex}
       />
 

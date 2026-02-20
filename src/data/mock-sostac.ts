@@ -1,4 +1,6 @@
 import type { MapNode, MapCable, Module, Step, Episode, ChatMessage } from "@/types/sostac";
+import { forgeSteps } from "./forge-steps";
+import { atlasSteps } from "./atlas-steps";
 
 export const mapNodes: MapNode[] = [
   {
@@ -309,117 +311,7 @@ export const atlasModules: Module[] = [
   },
 ];
 
-export const sampleSteps: Step[] = [
-  {
-    id: "step-forge-m3-s1",
-    moduleId: "forge-m3",
-    title: "Fuentes de Ingresos",
-    order: 1,
-    status: "completed",
-    agentInstruction:
-      "Vamos a mapear cómo genera dinero tu academia. Esto es fundamental para entender la salud de tu modelo.",
-    formFields: [
-      {
-        id: "income-sources",
-        type: "chip-selector",
-        label: "¿Cuáles son tus fuentes de ingresos actuales o planeadas?",
-        description: "Selecciona todas las que apliquen a tu modelo de academia.",
-        required: true,
-        options: [
-          { value: "cursos-grabados", label: "Cursos grabados", emoji: "🎬" },
-          { value: "membresia", label: "Membresía recurrente", emoji: "🔄" },
-          { value: "mentoria-grupal", label: "Mentoría grupal", emoji: "👥" },
-          { value: "coaching-1a1", label: "Coaching 1:1", emoji: "🤝" },
-          { value: "talleres-vivos", label: "Talleres en vivo", emoji: "🎤" },
-          { value: "certificaciones", label: "Certificaciones", emoji: "🏅" },
-          { value: "comunidad-paga", label: "Comunidad de pago", emoji: "💬" },
-          { value: "consultorias", label: "Consultorías", emoji: "💼" },
-        ],
-      },
-      {
-        id: "primary-revenue",
-        type: "radio",
-        label: "¿Cuál es tu fuente de ingresos PRINCIPAL (la que genera más del 50%)?",
-        required: true,
-        options: [
-          { value: "cursos-grabados", label: "Cursos grabados" },
-          { value: "membresia", label: "Membresía recurrente" },
-          { value: "mentoria-grupal", label: "Mentoría grupal" },
-          { value: "coaching-1a1", label: "Coaching 1:1" },
-          { value: "talleres-vivos", label: "Talleres en vivo" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "step-forge-m3-s2",
-    moduleId: "forge-m3",
-    title: "Estructura de Precios",
-    order: 2,
-    status: "in_progress",
-    agentInstruction:
-      "Ahora entendamos tu estructura de precios. Muchos coaches se subestiman. Vamos a ver dónde estás.",
-    formFields: [
-      {
-        id: "price-range",
-        type: "slider",
-        label: "¿En qué rango de precio está tu oferta principal?",
-        description: "Mueve el slider al rango más cercano a tu precio actual o planeado.",
-        required: true,
-        sliderPositions: ["$0–$97", "$97–$297", "$297–$997", "$997–$3,000", "$3,000+"],
-      },
-      {
-        id: "pricing-confidence",
-        type: "rating",
-        label: "¿Qué tan seguro/a te sientes con tu precio actual?",
-        description: "1 = muy inseguro, 5 = totalmente confiado",
-        required: true,
-      },
-      {
-        id: "pricing-notes",
-        type: "textarea",
-        label: "¿Qué factores consideras al definir tu precio?",
-        placeholder: "Por ejemplo: lo que cobra la competencia, lo que mis clientes pueden pagar, el valor que entrego...",
-        maxLength: 500,
-      },
-    ],
-  },
-  {
-    id: "step-atlas-m3-s1",
-    moduleId: "atlas-m3",
-    title: "Mapeo de Competidores Directos",
-    order: 1,
-    status: "in_progress",
-    agentInstruction:
-      "Voy a ayudarte a mapear quiénes son tus competidores directos. No para copiarte de ellos, sino para encontrar tu espacio único.",
-    formFields: [
-      {
-        id: "competitors-known",
-        type: "toggle-list",
-        label: "¿Conoces a estos tipos de competidores en tu nicho?",
-        description: "Activa los que ya has identificado en tu mercado.",
-        required: true,
-        options: [
-          { value: "academias-grandes", label: "Academias grandes (Coursera, Udemy)", description: "Plataformas masivas con cursos baratos" },
-          { value: "coaches-independientes", label: "Coaches independientes", description: "Personas con programas similares al tuyo" },
-          { value: "consultoras", label: "Consultoras tradicionales", description: "Empresas que ofrecen servicios similares en formato B2B" },
-          { value: "youtube-gratis", label: "Contenido gratuito (YouTube, podcasts)", description: "Creadores que dan valor sin cobrar" },
-          { value: "libros-cursos", label: "Libros y cursos autoinstructivos", description: "Alternativas de bajo costo y autoservicio" },
-        ],
-        prefilled: true,
-        prefilledSource: "Delfino — Brief Express",
-      },
-      {
-        id: "top-competitor",
-        type: "text",
-        label: "Nombra a tu competidor más directo (el que más se parece a lo que haces)",
-        placeholder: "Nombre del coach, academia o programa...",
-        required: true,
-        maxLength: 100,
-      },
-    ],
-  },
-];
+export const sampleSteps: Step[] = [...forgeSteps, ...atlasSteps];
 
 export const sampleEpisodes: Episode[] = [
   {

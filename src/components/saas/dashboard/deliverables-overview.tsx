@@ -62,7 +62,9 @@ export function DeliverablesOverview({ deliverables }: DeliverablesOverviewProps
       {/* Recent deliverables */}
       <div className="flex flex-col gap-2">
         {recentDeliverables.map((deliverable) => (
-          <DeliverableCard key={deliverable.id} deliverable={deliverable} />
+          <Link key={deliverable.id} href={`/academy/deliverables/${deliverable.id}`}>
+            <DeliverableCard deliverable={deliverable} />
+          </Link>
         ))}
       </div>
     </GlassCard>

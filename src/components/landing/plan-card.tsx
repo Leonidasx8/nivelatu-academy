@@ -95,7 +95,7 @@ export function PlanCard({ plan, featured = false, billingCycle }: PlanCardProps
 
         {/* CTA */}
         <Link
-          href={isEnterprise ? "/contact" : "/register"}
+          href={isEnterprise ? "#" : "/auth/register"}
           className={cn(
             "mt-auto flex items-center justify-center gap-2 rounded-lg py-3 px-5 text-sm font-sans font-semibold transition-all duration-200",
             featured

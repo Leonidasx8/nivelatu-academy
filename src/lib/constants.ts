@@ -122,7 +122,7 @@ export const NAV_ITEMS = [
   { label: "Dashboard", href: "/dashboard", icon: "LayoutDashboard" },
   { label: "Mi Academia", href: "/academy", icon: "GraduationCap" },
   { label: "Entregables", href: "/academy/deliverables", icon: "FileCheck" },
-  { label: "Comunidad", href: "/community", icon: "Users" },
+  { label: "Comunidad", href: "#", icon: "Users" },
 ] as const;
 
 export const NAV_ITEMS_BOTTOM = [

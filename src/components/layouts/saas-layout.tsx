@@ -92,11 +92,14 @@ function SaasTopHeader() {
             <DropdownMenuSeparator
               style={{ backgroundColor: "rgba(255,255,255,0.08)" }}
             />
-            <DropdownMenuItem
-              className="text-sm cursor-pointer"
-              style={{ color: "#EF4444" }}
-            >
-              Cerrar sesión
+            <DropdownMenuItem asChild>
+              <Link
+                href="/"
+                className="text-sm cursor-pointer"
+                style={{ color: "#EF4444" }}
+              >
+                Cerrar sesión
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

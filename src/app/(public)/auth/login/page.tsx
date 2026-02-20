@@ -1,14 +1,23 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Github, Eye, EyeOff, Lock, Zap } from "lucide-react";
 import { AuthBrandPanel } from "@/components/landing/auth-brand-panel";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = () => {
+    setLoading(true);
+    // Mock login — navigate to dashboard after brief delay
+    setTimeout(() => router.push("/dashboard"), 800);
+  };
 
   return (
     <div className="min-h-[calc(100vh-72px)] grid md:grid-cols-2">
@@ -40,7 +49,7 @@ export default function LoginPage() {
 
           {/* OAuth buttons */}
           <div className="flex flex-col gap-3">
-            <button className="glass-card glass-card-hover flex items-center justify-center gap-3 py-3 rounded-xl text-text-primary font-body text-sm font-semibold transition-all duration-200 border border-glass-border">
+            <button onClick={handleLogin} className="glass-card glass-card-hover flex items-center justify-center gap-3 py-3 rounded-xl text-text-primary font-body text-sm font-semibold transition-all duration-200 border border-glass-border">
               <svg className="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
                 <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -49,7 +58,7 @@ export default function LoginPage() {
               </svg>
               Continuar con Google
             </button>
-            <button className="glass-card glass-card-hover flex items-center justify-center gap-3 py-3 rounded-xl text-text-primary font-body text-sm font-semibold transition-all duration-200 border border-glass-border">
+            <button onClick={handleLogin} className="glass-card glass-card-hover flex items-center justify-center gap-3 py-3 rounded-xl text-text-primary font-body text-sm font-semibold transition-all duration-200 border border-glass-border">
               <Github className="w-5 h-5" />
               Continuar con GitHub
             </button>
@@ -114,9 +123,17 @@ export default function LoginPage() {
           </div>
 
           {/* CTA */}
-          <button className="w-full flex items-center justify-center gap-2 bg-accent hover:bg-accent-light text-white font-sans font-semibold py-3.5 rounded-xl btn-glow transition-all duration-200">
-            <Zap className="w-4 h-4" fill="currentColor" />
-            Iniciar sesión
+          <button
+            onClick={handleLogin}
+            disabled={loading}
+            className="w-full flex items-center justify-center gap-2 bg-accent hover:bg-accent-light text-white font-sans font-semibold py-3.5 rounded-xl btn-glow transition-all duration-200 disabled:opacity-60"
+          >
+            {loading ? (
+              <span className="animate-spin w-4 h-4 border-2 border-white/30 border-t-white rounded-full" />
+            ) : (
+              <Zap className="w-4 h-4" fill="currentColor" />
+            )}
+            {loading ? "Ingresando..." : "Iniciar sesión"}
           </button>
 
           {/* Sign up link */}

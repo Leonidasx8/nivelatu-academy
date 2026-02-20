@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Zap } from "lucide-react";
 import { AuthBrandPanel } from "@/components/landing/auth-brand-panel";
 import { StepIndicator } from "@/components/landing/step-indicator";
@@ -9,6 +10,7 @@ import { StepProfile } from "@/components/landing/register/step-profile";
 import { StepPlan } from "@/components/landing/register/step-plan";
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<Record<string, string>>({});
 
@@ -16,7 +18,14 @@ export default function RegisterPage() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const goNext = () => setStep((s) => Math.min(s + 1, 3));
+  const goNext = () => {
+    if (step === 3) {
+      // Mock registration complete — navigate to dashboard
+      router.push("/dashboard");
+    } else {
+      setStep((s) => Math.min(s + 1, 3));
+    }
+  };
   const goBack = () => setStep((s) => Math.max(s - 1, 1));
 
   return (
